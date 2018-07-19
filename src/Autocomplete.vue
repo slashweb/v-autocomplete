@@ -1,5 +1,5 @@
 <template lang="html">
-  <div class="v-autocomplete">
+  <div class="v-autocomplete center-block">
     <div class="v-autocomplete-input-group" :class="{'v-autocomplete-selected': value}">
       <input type="search" v-model="searchText" v-bind="inputAttrs" 
             :class="inputAttrs.class || inputClass"
@@ -9,7 +9,7 @@
             @keyup.enter="keyEnter" @keydown.tab="keyEnter" 
             @keydown.up="keyUp" @keydown.down="keyDown">
     </div>
-    <div class="v-autocomplete-list" v-if="show">
+    <div class="v-autocomplete-list center-block" v-if="show">
       <div class="v-autocomplete-list-item" v-for="item, i in internalItems" @click="onClickItem(item)"
            :class="{'v-autocomplete-item-active': i === cursor}" @mouseover="cursor = i">
         <div :is="componentItem" :item="item" :searchText="searchText"></div>
@@ -158,15 +158,30 @@ export default {
 
 <style>
   .v-autocomplete {
+position: relative;
+}
+
+.v-autocomplete .v-autocomplete-list {
     position: relative;
-  }
-  .v-autocomplete .v-autocomplete-list {
-    position: absolute;
-  }
-  .v-autocomplete .v-autocomplete-list .v-autocomplete-list-item {
+    min-height: 0vh !important;
+    max-width: 65vh !important;
+    max-height: 30vh !important;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: block!important;
+    margin-right: auto!important;
+    margin-left: auto!important;
+}
+
+.v-autocomplete .v-autocomplete-list .v-autocomplete-list-item {
     cursor: pointer;
-  }
-  .v-autocomplete .v-autocomplete-list .v-autocomplete-list-item.v-autocomplete-item-active {
+}
+
+.v-autocomplete .v-autocomplete-list .v-autocomplete-list-item.v-autocomplete-item-active {
     background-color: #f3f6fa;
-  }
+}
+
+.v-autocomplete-list{
+    display: none !important;
+}
 </style>
